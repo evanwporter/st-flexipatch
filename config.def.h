@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+static char *font = "JetBrainsMono Nerd Font:pixelsize=32:antialias=true:autohint=true";
 #if FONT2_PATCH
 /* Spare fonts */
 static char *font2[] = {
@@ -187,32 +187,32 @@ char *xdndescchar = " !\"#$&'()*;<>?[\\]^`{|}~";
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
-	"black",
-	"red3",
-	"green3",
-	"yellow3",
-	"blue2",
-	"magenta3",
-	"cyan3",
-	"gray90",
+	"#665c54", /* black */
+	"#ea6962", /* red */
+	"#a9b665", /* green */
+	"#e78a4e", /* yellow */
+	"#7daea3", /* blue */
+	"#d3869b", /* magenta */
+	"#89b482", /* cyan */
+	"#d4be98", /* white */
 
 	/* 8 bright colors */
-	"gray50",
-	"red",
-	"green",
-	"yellow",
-	"#5c5cff",
-	"magenta",
-	"cyan",
-	"white",
+	"#928374", /* black */
+	"#ea6962", /* red */
+	"#a9b665", /* green */
+	"#d8a657", /* yellow */
+	"#7daea3", /* blue */
+	"#d3869b", /* magenta */
+	"#89b482", /* cyan */
+	"#d4be98", /* white */
 
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#add8e6", /* 256 -> cursor */
-	"#555555", /* 257 -> rev cursor*/
-	"#000000", /* 258 -> bg */
-	"#e5e5e5", /* 259 -> fg */
+	"#a89984", /* 256 -> cursor */
+	"#282828", /* 257 -> cursor text */
+	"#282828", /* 258 -> bg */
+	"#d4be98", /* 259 -> fg */
 };
 
 
@@ -234,7 +234,7 @@ unsigned int selectionfg = 258;
 unsigned int selectionbg = 259;
 /* If 0 use selectionfg as foreground in order to have a uniform foreground-color */
 /* Else if 1 keep original foreground-color of each cell => more colors :) */
-static int ignoreselfg = 1;
+static int ignoreselfg = 0;
 #endif // SELECTION_COLORS_PATCH
 #if KEYBOARDSELECT_PATCH && REFLOW_PATCH
 /* Foreground and background color of search results */
@@ -273,8 +273,8 @@ static unsigned int cursorshape = 2;
  * Default columns and rows numbers
  */
 
-static unsigned int cols = 80;
-static unsigned int rows = 24;
+static unsigned int cols = 160;
+static unsigned int rows = 48;
 
 #if ANYGEOMETRY_PATCH
 /*

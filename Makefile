@@ -10,10 +10,10 @@ OBJ = $(SRC:.c=.o)
 all: st
 
 config.h:
-	cp config.def.h config.h
+	test -e config.h || ln -s config.def.h config.h
 
 patches.h:
-	cp patches.def.h patches.h
+	test -e patches.h || ln -s patches.def.h patches.h
 
 .c.o:
 	$(CC) $(STCFLAGS) -c $<

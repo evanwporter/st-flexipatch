@@ -81,7 +81,7 @@
  * This patch makes st set CLIPBOARD on selection.
  * https://st.suckless.org/patches/clipboard/
  */
-#define CLIPBOARD_PATCH 0
+#define CLIPBOARD_PATCH 1
 
 /* This patch allows st to be resized without cutting off text when the terminal window is
  * made larger again. Text does not wrap when the terminal window is made smaller, you may

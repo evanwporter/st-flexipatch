@@ -24,6 +24,7 @@
 					freetype
 					harfbuzz
 					libx11
+					libXcursor
 					libxft
 					libxinerama
 				];

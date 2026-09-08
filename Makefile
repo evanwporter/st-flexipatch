@@ -29,6 +29,9 @@ st: $(OBJ)
 clean:
 	rm -f st $(OBJ) st-$(VERSION).tar.gz
 
+compile_commands:
+	bear -- $(MAKE) clean all
+
 dist: clean
 	mkdir -p st-$(VERSION)
 	cp -R FAQ LEGACY TODO LICENSE Makefile README config.mk\
@@ -54,4 +57,4 @@ uninstall:
 	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.1
 	rm -f $(DESTDIR)$(PREFIX)/share/applications/st.desktop # desktop-entry patch
 
-.PHONY: all clean dist install uninstall
+.PHONY: all clean compile_commands dist install uninstall

@@ -12,22 +12,22 @@ all: st
 config.h:
 	test -e config.h || ln -s config.def.h config.h
 
-patches.h:
-	test -e patches.h || ln -s patches.def.h patches.h
-
 .c.o:
 	$(CC) $(STCFLAGS) -c $<
 
 st.o: config.h st.h win.h
 x.o: arg.h config.h st.h win.h $(LIGATURES_H)
 
-$(OBJ): config.h config.mk patches.h
+$(OBJ): config.h config.mk
 
 st: $(OBJ)
 	$(CC) -o $@ $(OBJ) $(STLDFLAGS)
 
 clean:
 	rm -f st $(OBJ) st-$(VERSION).tar.gz
+
+compile_commands:
+	bear -- $(MAKE) clean all
 
 dist: clean
 	mkdir -p st-$(VERSION)
@@ -54,4 +54,4 @@ uninstall:
 	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.1
 	rm -f $(DESTDIR)$(PREFIX)/share/applications/st.desktop # desktop-entry patch
 
-.PHONY: all clean dist install uninstall
+.PHONY: all clean compile_commands dist install uninstall

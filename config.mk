@@ -26,6 +26,9 @@ LIGATURES_H = hb.h
 LIGATURES_INC = `$(PKG_CONFIG) --cflags harfbuzz`
 LIGATURES_LIBS = `$(PKG_CONFIG) --libs harfbuzz`
 
+NOTIFY_INC = `$(PKG_CONFIG) --cflags libnotify`
+NOTIFY_LIBS = `$(PKG_CONFIG) --libs libnotify`
+
 # Uncomment this for the SIXEL patch / SIXEL_PATCH
 #SIXEL_C = sixel.c sixel_hls.c
 #SIXEL_LIBS = `$(PKG_CONFIG) --libs imlib2`
@@ -37,12 +40,15 @@ LIGATURES_LIBS = `$(PKG_CONFIG) --libs harfbuzz`
 INCS = -I$(X11INC) \
        `$(PKG_CONFIG) --cflags fontconfig` \
        `$(PKG_CONFIG) --cflags freetype2` \
-       $(LIGATURES_INC)
-LIBS = -L$(X11LIB) -lm -lX11 -lutil -lXft ${SIXEL_LIBS} ${XRENDER} ${XCURSOR}\
+       $(LIGATURES_INC) \
+       $(NOTIFY_INC)
+
+LIBS = -L$(X11LIB) -lm -lX11 -lutil -lXft ${SIXEL_LIBS} ${XRENDER} ${XCURSOR} \
        `$(PKG_CONFIG) --libs fontconfig` \
        `$(PKG_CONFIG) --libs freetype2` \
        $(LIGATURES_LIBS) \
-       $(NETWMICON_LIBS)
+       $(NETWMICON_LIBS) \
+       $(NOTIFY_LIBS)
 
 # flags
 STCPPFLAGS = -DVERSION=\"$(VERSION)\" -DICON=\"$(ICONPREFIX)/$(ICONNAME)\" -D_XOPEN_SOURCE=600

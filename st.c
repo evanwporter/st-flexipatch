@@ -1938,6 +1938,10 @@ strhandle(void)
 			return;
 		case 8: /* Clear Hyperlinks */
 			return;
+        case 9: /* desktop notification */
+            if (narg > 1 && strescseq.args[1][0] != '\0')
+                xnotify(strescseq.args[1]);
+            return;
 		case 10: /* set dynamic VT100 text foreground color */
 		case 11: /* set dynamic VT100 text background color */
 		case 12: /* set dynamic text cursor color */

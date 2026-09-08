@@ -14,6 +14,11 @@
 #include <X11/keysym.h>
 #include <X11/Xft/Xft.h>
 #include <X11/XKBlib.h>
+#include <libnotify/notify.h>
+
+/* libnotify's GLib headers define these names too. */
+#undef MIN
+#undef MAX
 
 char *argv0;
 #include "arg.h"
@@ -1630,6 +1635,19 @@ xsettitle(char *p)
 	XSetWMName(xw.dpy, xw.win, &prop);
 	XSetTextProperty(xw.dpy, xw.win, &prop, xw.netwmname);
 	XFree(prop.value);
+}
+
+void
+xnotify(const char *body)
+{
+	NotifyNotification *notification;
+
+	if (!notify_is_initted() && !notify_init("st"))
+		return;
+
+	notification = notify_notification_new("st", body, NULL);
+	notify_notification_show(notification, NULL);
+	g_object_unref(notification);
 }
 
 int

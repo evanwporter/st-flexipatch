@@ -30,6 +30,7 @@ void xdrawcursor(int, int, Glyph, int, int, Glyph, Line, int);
 void xdrawline(Line, int, int, int);
 void xfinishdraw(void);
 void xloadcols(void);
+void xnotify(const char *);
 int xsetcolorname(int, const char *);
 void xseticontitle(char *);
 void xsettitle(char *);

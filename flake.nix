@@ -10,42 +10,47 @@
 		supportedSystems = ["x86_64-linux" "aarch64-linux"];
 		forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 	in {
-		packages = forAllSystems (system: let
-			pkgs = nixpkgs.legacyPackages.${system};
-		in {
-			default = pkgs.stdenv.mkDerivation {
-				pname = "st-flexipatch";
-				version = "0.9.3";
-				src = self;
+		packages =
+			forAllSystems (system: let
+					pkgs = nixpkgs.legacyPackages.${system};
+				in {
+					default =
+						pkgs.stdenv.mkDerivation {
+							pname = "st-flexipatch";
+							version = "0.9.3";
+							src = self;
 
-				nativeBuildInputs = [pkgs.pkg-config];
-				buildInputs = with pkgs; [
-					fontconfig
-					freetype
-					harfbuzz
-					libx11
-					libXcursor
-					libxft
-					libxinerama
-				];
+							nativeBuildInputs = [pkgs.pkg-config];
+							buildInputs = with pkgs; [
+								fontconfig
+								freetype
+								harfbuzz
+								libx11
+								libXcursor
+								libxft
+								libxinerama
+								libnotify
+							];
 
-				installFlags = ["PREFIX=$(out)"];
-			};
-		});
+							installFlags = ["PREFIX=$(out)"];
+						};
+				});
 
-		devShells = forAllSystems (system: let
-			pkgs = nixpkgs.legacyPackages.${system};
-		in {
-			default = pkgs.mkShell {
-				inputsFrom = [self.packages.${system}.default];
-				packages = with pkgs; [
-					bear
-					clang-tools
-					gnumake
-					jq
-					pkg-config
-				];
-			};
-		});
+		devShells =
+			forAllSystems (system: let
+					pkgs = nixpkgs.legacyPackages.${system};
+				in {
+					default =
+						pkgs.mkShell {
+							inputsFrom = [self.packages.${system}.default];
+							packages = with pkgs; [
+								bear
+								clang-tools
+								gnumake
+								jq
+								pkg-config
+							];
+						};
+				});
 	};
 }
